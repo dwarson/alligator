@@ -1,0 +1,1 @@
+insert into fs_user (id, username, name, password) values(1,'user','June','123');
