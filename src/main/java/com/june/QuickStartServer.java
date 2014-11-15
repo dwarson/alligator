@@ -1,7 +1,3 @@
-/*******************************************************************************
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- *******************************************************************************/
 package com.june;
 
 import org.eclipse.jetty.server.Server;
@@ -13,7 +9,7 @@ public class QuickStartServer {
 	public static final String[] TLD_JAR_NAMES = new String[] { "spring-webmvc" };
 
 	public static void main(String[] args) throws Exception {
-//		Profiles.setProfileAsSystemProperty(Profiles.DEVELOPMENT);
+		Profiles.setProfileAsSystemProperty(Profiles.DEVELOPMENT);
 
 		Server server = JettyFactory.createServerInSource(PORT, CONTEXT);
 		JettyFactory.setTldJarNames(server, TLD_JAR_NAMES);

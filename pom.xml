@@ -13,10 +13,18 @@
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<hibernate.version>4.3.7.Final</hibernate.version>
 		<spring-data-jpa.version>1.7.1.RELEASE</spring-data-jpa.version>
+		<tomcat-jdbc.version>7.0.53</tomcat-jdbc.version>
 		<h2.version>1.3.176</h2.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<guava.version>17.0</guava.version>
+			<!--	<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
+		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
+		-->	
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>5.1.34</jdbc.driver.version>
 	</properties>
 	<dependencies>
 
@@ -73,11 +81,22 @@
 			<version>${spring-data-jpa.version}</version>
 		</dependency>
 
+		<!-- connection pool -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>${tomcat-jdbc.version}</version>
+			<scope>runtime</scope>
 		</dependency>
+
+		<!-- jdbc driver -->
+		<dependency>
+			<groupId>${jdbc.driver.groupId}</groupId>
+			<artifactId>${jdbc.driver.artifactId}</artifactId>
+			<version>${jdbc.driver.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- PERSISTENCE end -->
 
 		<!-- GENERAL UTILS begin -->
 		<dependency>
