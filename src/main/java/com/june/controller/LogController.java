@@ -43,9 +43,6 @@ public class LogController {
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(Log newLog, RedirectAttributes redirectAttributes) {
-		newLog.setLogType("default");
-		newLog.setStartTime(new Date());
-		newLog.setEndTime(new Date());
 		User user = userService.findUserByLoginName("user");
 		newLog.setUser(user);
 		logService.saveLog(newLog);
