@@ -18,13 +18,14 @@
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<guava.version>17.0</guava.version>
-			<!--	<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
+		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-		-->	
+		<!-- 
 		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 		<jdbc.driver.version>5.1.34</jdbc.driver.version>
+		-->	
 	</properties>
 	<dependencies>
 
