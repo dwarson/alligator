@@ -5,7 +5,7 @@ import org.eclipse.jetty.server.Server;
 public class QuickStartServer {
 
 	public static final int PORT = 8081;
-	public static final String CONTEXT = "/";
+	public static final String CONTEXT = "/alligator";
 	public static final String[] TLD_JAR_NAMES = new String[] { "spring-webmvc" };
 
 	public static void main(String[] args) throws Exception {

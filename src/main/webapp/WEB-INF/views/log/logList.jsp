@@ -4,16 +4,11 @@
 
 <html>
 <head>
-<title>Log Management</title>
+<link href="${ctx}/static/css/common.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-	<c:if test="${not empty message}">
-		<div id="message" class="alert alert-success">
-			<button data-dismiss="alert" class="close">×</button>${message}</div>
-	</c:if>
-
-	<table id="contentTable" class="table">
+	<table class="log">
 		<thead>
 			<tr>
 				<th>Log</th>
@@ -32,5 +27,9 @@
 	<div>
 		<a class="btn" href="${ctx}/log/create">New Log</a>
 	</div>
+	<c:if test="${not empty message}">
+		<div id="message" class="alert alert-success">
+			<button data-dismiss="alert" class="close">×</button>${message}</div>
+	</c:if>
 </body>
 </html>
