@@ -12,26 +12,29 @@ import com.june.repository.UserDao;
 @Component
 @Transactional
 public class UserService {
-    private UserDao userDao;
+	public static final String HASH_ALGORITHM = "SHA-1";
+	public static final int HASH_INTERATIONS = 1024;
+	private static final int SALT_SIZE = 8;
+	private UserDao userDao;
 
-    public List<User> getAllUser() {
-        return (List<User>) userDao.findAll();
-    }
+	public List<User> getAllUser() {
+		return (List<User>) userDao.findAll();
+	}
 
-    public User getUser(Long id) {
-        return userDao.findOne(id);
-    }
+	public User getUser(Long id) {
+		return userDao.findOne(id);
+	}
 
-    public User findUserByLoginName(String username) {
-        return userDao.findByUsername(username);
-    }
+	public User findUserByUsername(String username) {
+		return userDao.findByUsername(username);
+	}
 
-    public void registerUser(User user) {
-        userDao.save(user);
-    }
+	public void registerUser(User user) {
+		userDao.save(user);
+	}
 
-    @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 }

@@ -6,7 +6,11 @@
         username varchar(255) not null unique,
         name varchar(64),
         password varchar(255),
-        remember boolean
+        salt varchar(64) not null,
+		roles varchar(255) not null,
+		register_date timestamp not null,
+        remember boolean,
+        primary key (id)
 );
 
 create table fs_log (

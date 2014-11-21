@@ -1,6 +1,5 @@
 package com.june.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -46,7 +45,7 @@ public class LogController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(Log newLog, RedirectAttributes redirectAttributes) {
-        User user = userService.findUserByLoginName("user");
+        User user = userService.findUserByUsername("user");
         newLog.setUser(user);
         logService.saveLog(newLog);
         redirectAttributes.addFlashAttribute("message", "Create Log Success!");

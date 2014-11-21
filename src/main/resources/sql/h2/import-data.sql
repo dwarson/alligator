@@ -1,1 +1,1 @@
-insert into fs_user (id, username, name, password, remember) values(1,'user','Jun Wu','1234', true);
+insert into fs_user (id, username, name, password, salt, roles, register_date, remember) values(1,'user','June','2488aa0c31c624687bd9928e0a5d29e7d1ed520b','6d65d24122c30500','user','2014-11-20 19:00:00', true);

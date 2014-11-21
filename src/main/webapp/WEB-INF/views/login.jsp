@@ -1,6 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
@@ -14,26 +14,35 @@
 	<section class="container">
 		<div class="login">
 			<h1>Login to Alligator</h1>
-			<sf:form method="POST" modelAttribute="user" action="/user">
+			<form id="loginForm" action="${ctx}/login" method="post">
 				<p>
-					<sf:input path="username" size="30" id="user_email"
-						placeholder="Username or Email" />
-					<sf:errors path="username" />
+					<input type="text" id="username" name="username"
+						value="${username}" placeholder="Username or Email" />
 				</p>
 				<p>
-					<sf:password path="password" size="30" id="password"
+					<input type="password" id="password" name="password"
 						placeholder="Password" />
-					<sf:errors path="password" />
 				</p>
 				<p class="remember_me">
-					<label> <sf:checkbox path="remember" id="remember_me" /> 
-						Remember me
-					</label>
+					<label for="rememberMe"><input type="checkbox"
+						id="rememberMe" id="rememberMe" /> Remember me </label>
 				</p>
 				<p class="submit">
 					<input type="submit" value="Login">
 				</p>
-			</sf:form>
+				
+				<%
+					String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+					if(error != null){
+					%>
+						<div id="alert">
+						 	<a class="alert" href="#alert">Login failed, please try again.</a>
+						</div>
+					<%
+					}
+				%>
+				
+			</form>
 		</div>
 	</section>
 </body>
