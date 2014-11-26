@@ -14,7 +14,10 @@
 	        /WEB-INF/applicationContext-shiro.xml
 	    </param-value>
 	</context-param>
-
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>development</param-value>
+	</context-param>
 	<listener>
 	  <listener-class>
 	    org.springframework.web.context.ContextLoaderListener
@@ -33,7 +36,14 @@
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<servlet>
 		<servlet-name>springServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
