@@ -12,7 +12,10 @@
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
+
 <link href="${ctx}/static/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/static/css/default.css" type="text/css" rel="stylesheet" />
+<script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
 <sitemesh:head/>
 </head>
 
