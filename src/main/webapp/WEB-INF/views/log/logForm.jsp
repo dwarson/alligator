@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
@@ -27,8 +28,11 @@
 			<div class="control-group">
 				<label for="log_type" class="control-label">Log Type</label>
 				<div class="controls">
-					<input type="text" id="log_type" name="logType" value="${log.logType}"	class="input-large required" minlength="3" />
-				</div>
+					<form:select path="log.logType.id">
+					   <form:option value="0" label="--- Select ---"/>
+					   <form:options items="${logTypes}" itemValue="id" itemLabel="title"/>
+					</form:select>
+        		</div>
 			</div>
 			<div class="control-group">
 				<label for="start_time" class="control-label">Start Time</label>

@@ -1,41 +1,31 @@
 package com.june.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
+//JPA标识
 @Entity
-@Table(name = "fs_log")
-public class Log extends IdEntity {
+@Table(name = "thoughs")
+public class Thoughts extends IdEntity {
 
 	private String title;
-	private Topic logType;
+	private String type;
 	private String description;
-	private Date startTime;
-	private Date endTime;
 	private User user;
 
+	// JSR303 BeanValidator的校验规则
+	@NotBlank
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	
-    @ManyToOne
-    @JoinColumn(name = "log_type")
-	public Topic getLogType() {
-		return logType;
-	}
-
-	public void setLogType(Topic logType) {
-		this.logType = logType;
 	}
 
 	public String getDescription() {
@@ -46,22 +36,7 @@ public class Log extends IdEntity {
 		this.description = description;
 	}
 
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
+	// JPA 基于USER_ID列的多对一关系定义
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	public User getUser() {

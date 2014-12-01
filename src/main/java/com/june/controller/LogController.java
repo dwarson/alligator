@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.june.entity.Log;
-import com.june.entity.User;
+import com.june.entity.Topic;
 import com.june.service.LogService;
+import com.june.service.TopicService;
 import com.june.service.UserService;
+import com.june.service.user.ShiroDbRealm.ShiroUser;
 
 @Controller
 @RequestMapping(value = "/log")
@@ -29,6 +34,9 @@ public class LogController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TopicService topicService;
+
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
         List<Log> logs = logService.getAllLog();
@@ -38,6 +46,8 @@ public class LogController {
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String addLog(Model model) {
+        List<Topic> logTypes = topicService.getAllTopic();
+        model.addAttribute("logTypes", logTypes);
         model.addAttribute("log", new Log());
         model.addAttribute("action", "create");
         return "log/logForm";
@@ -45,8 +55,8 @@ public class LogController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(Log newLog, RedirectAttributes redirectAttributes) {
-        User user = userService.findUserByUsername("user");
-        newLog.setUser(user);
+        Long id = getCurrentUserId();
+        newLog.setUser(userService.getUser(id));
         logService.saveLog(newLog);
         redirectAttributes.addFlashAttribute("message", "Create Log Success!");
         return "redirect:/log/";
@@ -55,6 +65,8 @@ public class LogController {
     @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("log", logService.getLog(id));
+        List<Topic> logTypes = topicService.getAllTopic();
+        model.addAttribute("logTypes", logTypes);
         model.addAttribute("action", "update");
         return "log/logForm";
     }
@@ -74,10 +86,16 @@ public class LogController {
     }
 
     @ModelAttribute
-    public void getLog(@RequestParam(value = "id", defaultValue = "-1") Long id,
+    public void getLog(
+            @RequestParam(value = "id", defaultValue = "-1") Long id,
             Model model) {
         if (id != -1) {
             model.addAttribute("log", logService.getLog(id));
         }
+    }
+
+    private Long getCurrentUserId() {
+        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        return user.id;
     }
 }
