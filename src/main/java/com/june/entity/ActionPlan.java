@@ -1,31 +1,38 @@
 package com.june.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotBlank;
 
-//JPA标识
 @Entity
-@Table(name = "thoughs")
-public class Thoughts extends IdEntity {
+@Table(name = "fs_action")
+public class ActionPlan extends IdEntity {
 
 	private String title;
-	private String type;
+	private Integer type;
 	private String description;
+	private Thought thought;
 	private User user;
 
-	// JSR303 BeanValidator的校验规则
-	@NotBlank
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Column(name = "action_type")
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	public String getDescription() {
@@ -36,7 +43,16 @@ public class Thoughts extends IdEntity {
 		this.description = description;
 	}
 
-	// JPA 基于USER_ID列的多对一关系定义
+	@ManyToOne
+	@JoinColumn(name = "thought_id")
+	public Thought getThought() {
+		return thought;
+	}
+
+	public void setThought(Thought thought) {
+		this.thought = thought;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	public User getUser() {

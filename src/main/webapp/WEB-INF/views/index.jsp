@@ -5,21 +5,22 @@
 <head>
 </head>
 <body>
-	<h2>Welcome</h2>
 	<form id="index">
 		<fieldset>
-			<legend>Profile</legend>
+			<legend>User Profile</legend>
 			<div>
-				<label for="user_full_name">Full Name:</label> ${name}
+				<label for="user_full_name">Name: ${name}</label>
 			</div>
 		</fieldset>
 		<div>
-			<h2 class="nav">
+			<h3 class="nav">
         		<span>Daily Task</span>
-            </h2>
+            </h3>
 			<ul class="list">
-				<li class="listTypesc"><a href="${ctx}/log">Log Management</a></li>
-				<li class="listTypesc"><a href="${ctx}/topic">Topic Management</a></li>
+				<li class="listType"><a href="${ctx}/topic">Topic Management</a></li>
+				<li class="listType"><a href="${ctx}/log">Log Management</a></li>
+				<li class="listType"><a href="${ctx}/thought">Thought Management</a></li>
+				<li class="listType"><a href="${ctx}/actionPlan">Action Plan Management</a></li>
 			</ul>
 		</div>
 	</form>

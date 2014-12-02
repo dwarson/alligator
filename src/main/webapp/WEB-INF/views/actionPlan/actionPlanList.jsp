@@ -10,7 +10,7 @@
 	</c:if>
 	<div class="row">
 		<div class="span4 offset7">
-			<form class="form-search" action="#">
+			<form class="form-search" actionPlan="#">
 				<label>Title：</label> <input type="text" name="search_LIKE_title" class="input-medium" value="${param.search_LIKE_title}"> 
 				<button type="submit" class="btn" id="search_btn">Search</button>
 		    </form>
@@ -18,17 +18,17 @@
 	</div>
 	
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>Log</th><th>Management</th></tr></thead>
+		<thead><tr><th>ActionPlan</th><th>Management</th></tr></thead>
 		<tbody>
-		<c:forEach items="${logs}" var="log">
+		<c:forEach items="${actionPlans}" var="actionPlan">
 			<tr>
-				<td><a href="${ctx}/log/update/${log.id}">${log.title}</a></td>
-				<td><a href="${ctx}/log/delete/${log.id}">Delete</a></td>
+				<td><a href="${ctx}/actionPlan/update/${actionPlan.id}">${actionPlan.title}</a></td>
+				<td><a href="${ctx}/actionPlan/delete/${actionPlan.id}">Delete</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	
-	<div><a class="btn" href="${ctx}/log/create">Create Log</a></div>
+	<div><a class="btn" href="${ctx}/actionPlan/create">Create ActionPlan</a></div>
 </body>
 </html>
