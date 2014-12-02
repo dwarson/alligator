@@ -13,7 +13,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class ActionPlan extends IdEntity {
 
 	private String title;
-	private Integer type;
+	private String type;
+	private String context;
+	private String urgency;
+	private String energy;
+	private String priority;
 	private String description;
 	private Thought thought;
 	private User user;
@@ -27,15 +31,47 @@ public class ActionPlan extends IdEntity {
 	}
 
 	@Column(name = "action_type")
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
-	public String getDescription() {
+	public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+
+    public String getUrgency() {
+        return urgency;
+    }
+
+    public void setUrgency(String urgency) {
+        this.urgency = urgency;
+    }
+
+    public String getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(String energy) {
+        this.energy = energy;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getDescription() {
 		return description;
 	}
 

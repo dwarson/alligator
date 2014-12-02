@@ -25,7 +25,12 @@ import com.june.service.user.ShiroDbRealm.ShiroUser;
 @Controller
 @RequestMapping(value = "/actionPlan")
 public class ActionPlanController {
-
+    private static String[ ] ACTION_PLAN_TYPES = {"ASAP","Scheduled","Delegated","Inactive","Done"};
+    private static String[ ] ACTION_PLAN_CONTEXT = {"Home","Office","Church","Driving","Shopping"};
+    private static String[ ] ACTION_PLAN_URGENCY = {"Immediate","Today","This Week","This Month","This Year","Next Year","Next Few Year"};
+    private static String[ ] ACTION_PLAN_ENERGY = {"Low Mental","Low Physical","Med Mental","Med Physical","High Mental","High Physical"};
+    private static String[ ] ACTION_PLAN_PRIORITY = {"Critical","Important","Not Critical","Not Important"};
+    
 	@Autowired
 	private ActionPlanService actionPlanService;
 
@@ -44,8 +49,13 @@ public class ActionPlanController {
 
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String addActionPlan(Model model) {
-		int[ ] actionPlanTypes = {1,2,3,4};
-		model.addAttribute("actionPlanTypes", actionPlanTypes);
+	    List<Thought> thoughts = thoughtService.getAllThought();
+		model.addAttribute("thoughts", thoughts);
+		model.addAttribute("types", ACTION_PLAN_TYPES);
+		model.addAttribute("contexts", ACTION_PLAN_CONTEXT);
+		model.addAttribute("urgencys", ACTION_PLAN_URGENCY);
+		model.addAttribute("energys", ACTION_PLAN_ENERGY);
+		model.addAttribute("priorities", ACTION_PLAN_PRIORITY);
 		model.addAttribute("actionPlan", new ActionPlan());
 		model.addAttribute("action", "create");
 		return "actionPlan/actionPlanForm";
@@ -56,7 +66,6 @@ public class ActionPlanController {
 			RedirectAttributes redirectAttributes) {
 		Long id = getCurrentUserId();
 		newActionPlan.setUser(userService.getUser(id));
-		newActionPlan.setThought(thoughtService.getThought(new Long(33)));//TODO: get thought
 		actionPlanService.saveActionPlan(newActionPlan);
 		redirectAttributes.addFlashAttribute("message",
 				"Create ActionPlan Success!");
@@ -65,10 +74,15 @@ public class ActionPlanController {
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
+	    List<Thought> thoughts = thoughtService.getAllThought();
+        model.addAttribute("thoughts", thoughts);
 		model.addAttribute("actionPlan", actionPlanService.getActionPlan(id));
-		int[ ] actionPlanTypes = {1,2,3,4};
-		model.addAttribute("actionPlanTypes", actionPlanTypes);
-		model.addAttribute("action", "update");
+		model.addAttribute("types", ACTION_PLAN_TYPES);
+        model.addAttribute("contexts", ACTION_PLAN_CONTEXT);
+        model.addAttribute("urgencys", ACTION_PLAN_URGENCY);
+        model.addAttribute("energys", ACTION_PLAN_ENERGY);
+        model.addAttribute("priorities", ACTION_PLAN_PRIORITY);
+        model.addAttribute("action", "update");
 		return "actionPlan/actionPlanForm";
 	}
 

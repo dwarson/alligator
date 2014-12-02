@@ -25,11 +25,56 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label for="actionPlan_type" class="control-label">ActionPlan Type</label>
+				<label for="thought" class="control-label">Thought</label>
+				<div class="controls">
+					<form:select path="actionPlan.thought.id">
+					   <form:option value="" label="--- Select ---"/>
+					   <form:options items="${thoughts}" itemValue="id" itemLabel="title"/>
+					</form:select>
+        		</div>
+			</div>
+			<div class="control-group">
+				<label for="actionPlan_type" class="control-label">Status</label>
 				<div class="controls">
 					<form:select path="actionPlan.type">
-					   <form:option value="0" label="--- Select ---"/>
-					   <form:options items="${actionPlanTypes}"/>
+					   <form:option value="" label="--- Select ---"/>
+					   <form:options items="${types}"/>
+					</form:select>
+        		</div>
+			</div>
+			<div class="control-group">
+				<label for="context" class="control-label">Context</label>
+				<div class="controls">
+					<form:select path="actionPlan.context">
+					   <form:option value="" label="--- Select ---"/>
+					   <form:options items="${contexts}"/>
+					</form:select>
+        		</div>
+			</div>
+			<div class="control-group">
+				<label for="priority" class="control-label">Priority</label>
+				<div class="controls">
+					<form:select path="actionPlan.priority">
+					   <form:option value="" label="--- Select ---"/>
+					   <form:options items="${priorities}"/>
+					</form:select>
+        		</div>
+			</div>
+			<div class="control-group">
+				<label for="urgency" class="control-label">Urgency</label>
+				<div class="controls">
+					<form:select path="actionPlan.urgency">
+					   <form:option value="" label="--- Select ---"/>
+					   <form:options items="${urgencys}"/>
+					</form:select>
+        		</div>
+			</div>
+			<div class="control-group">
+				<label for="energy" class="control-label">Energy</label>
+				<div class="controls">
+					<form:select path="actionPlan.energy">
+					   <form:option value="" label="--- Select ---"/>
+					   <form:options items="${energys}"/>
 					</form:select>
         		</div>
 			</div>
