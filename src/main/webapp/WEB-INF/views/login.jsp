@@ -4,42 +4,40 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-<link href="${ctx}/static/css/login.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-	<section class="container">
-		<div class="login">
-			<h1>Login to Alligator</h1>
-			<form id="loginForm" action="${ctx}/login" method="post">
-				<p>
-					<input type="text" id="username" name="username"
-						value="${username}" placeholder="Username or Email" />
-				</p>
-				<p>
-					<input type="password" id="password" name="password"
-						placeholder="Password" />
-				</p>
-				<p class="remember_me">
-					<label for="rememberMe"><input type="checkbox"
-						id="rememberMe" id="rememberMe" /> Remember me </label>
-				</p>
-				<p class="submit">
-					<input type="submit" value="Login">
-				</p>
-				
-				<%
-					String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-					if(error != null){
-					%>
-						<div id="alert">
-						 	<a class="alert" href="#alert">Login failed, please try again.</a>
-						</div>
-					<%
-					}
-				%>
-				
-			</form>
+<section class="container">
+	<form id="loginForm" action="${ctx}/login" method="post"  class="form-horizontal">
+		<div class="control-group">
+			<label for="username" class="control-label">User Name:</label>
+			<div class="controls">
+				<input type="text" id="username" name="username"  value="${username}" placeholder="Username or Email" class="input-medium required"/>
+			</div>
 		</div>
-	</section>
+		<div class="control-group">
+			<label for="password" class="control-label">Password:</label>
+			<div class="controls">
+				<input type="password" id="password" name="password" placeholder="Password" class="input-medium required"/>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> Remember me</label>
+				<input id="submit_btn" class="btn" type="submit" value="Login"/> <a class="btn" href="${ctx}/register">Sign up now</a>
+			</div>
+		</div>
+			<%
+				String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+				if(error != null){
+				%>
+					<div id="alert">
+					 	<a class="alert" href="#alert">Login failed, please try again.</a>
+					</div>
+				<%
+				}
+			%>
+	</form>
+</section>
 </body>
 </html>

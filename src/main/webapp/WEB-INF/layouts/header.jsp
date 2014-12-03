@@ -4,7 +4,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="header">
 	<div id="title">
-	    <h2><a href="${ctx}">Alligator</a>
+	    <h4><a href="${ctx}">Alligator</a>
 	    <shiro:user>
 			<div class="btn-group pull-right">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -22,6 +22,6 @@
 				</ul>
 			</div>
 		</shiro:user>
-		</h2>
+		</h4>
 	</div>
 </div>

@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.june.controller;
+package com.june.controller.user;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -34,11 +34,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String fail(
-			@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String username,
-			Model model) {
-		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM,
-				username);
+	public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String username,Model model) {
+		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, username);
 		return "login";
 	}
 
