@@ -13,9 +13,17 @@
 			</div>
 		</fieldset>
 		<div>
-			<h3 class="nav">
+			<h4 class="nav">
+        		<span>Christian Life</span>
+            </h4>
+			<ul class="list">
+				<li class="listType"><a href="${ctx}/bible">Bible Reading</a></li>
+			</ul>
+		</div>
+		<div>
+			<h4 class="nav">
         		<span>Daily Task</span>
-            </h3>
+            </h4>
 			<ul class="list">
 				<li class="listType"><a href="${ctx}/topic">Topic Management</a></li>
 				<li class="listType"><a href="${ctx}/log">Log Management</a></li>

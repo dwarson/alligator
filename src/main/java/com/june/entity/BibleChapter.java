@@ -13,10 +13,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class BibleChapter extends IdEntity {
     private BibleBook bibleBook;
     private String title;
-    private Integer status;
+    private String status;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
     public BibleBook getBibleBook() {
         return bibleBook;
@@ -34,11 +34,11 @@ public class BibleChapter extends IdEntity {
         this.title = title;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

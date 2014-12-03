@@ -11,16 +11,21 @@
 </head>
 
 <body>
-	<form id="inputForm" action="${ctx}/bibleChapter/${action}" method="post" class="form-horizontal">
-		<input type="hidden" name="id" value="${bibleChapter.id}" />
+	<c:if test="${action == 'read'}">
+		<form id="inputForm" action="${ctx}/bible/${action}" method="post" class="form-horizontal">
+	</c:if>
+	<c:if test="${action != 'read'}">
+		<form id="inputForm" action="${ctx}/bibleChapter/${action}" method="post" class="form-horizontal">
+	</c:if>
+	<input type="hidden" name="id" value="${bibleChapter.id}" />
 		<fieldset>
 			<legend>
-				<small>BibleChapter Management</small>
+				<small>Bible Chapter Management</small>
 			</legend>
 			<div class="control-group">
-				<label for="bibleChapter_title" class="control-label">Bible Book Title:</label>
+				<label for="title" class="control-label">Title:</label>
 				<div class="controls">
-					<input type="text" id="bibleChapter_title" name="title" value="${bibleChapter.title}"
+					<input type="text" id="title" name="title" value="${bibleChapter.title}"
 						class="input-large required"/>
 				</div>
 			</div>
@@ -48,7 +53,7 @@
 			</div>
 			<div class="form-actions">
 				<input id="submit_btn" class="btn btn-primary" type="submit" value="Submit" />&nbsp; 
-					<input id="cancel_btn" class="btn" type="button" value="Retrun" onclick="history.back()" />
+				<input id="cancel_btn" class="btn" type="button" value="Retrun" onclick="history.back()" />
 			</div>
 		</fieldset>
 	</form>

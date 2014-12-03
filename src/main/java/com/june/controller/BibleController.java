@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.june.entity.BibleBook;
+import com.june.entity.BibleChapter;
 import com.june.service.BibleBookService;
 import com.june.service.BibleChapterService;
 
@@ -36,42 +36,20 @@ public class BibleController {
         return "bible/bibleList";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String addBibleBook(Model model) {
-        model.addAttribute("bibleBook", new BibleBook());
-        model.addAttribute("action", "create");
-        return "bibleBook/bibleBookForm";
+    @RequestMapping(value = "read/{id}", method = RequestMethod.GET)
+    public String readBook(@PathVariable("id") Long id, Model model) {
+        List<BibleBook> books = bibleBookService.getAllBibleBook();
+        model.addAttribute("books", books);
+        model.addAttribute("bibleChapter",
+                bibleChapterService.getBibleChapter(id));
+        model.addAttribute("action", "read");
+        return "bibleChapter/bibleChapterForm";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(BibleBook newBibleBook,
-            RedirectAttributes redirectAttributes) {
-        bibleBookService.saveBibleBook(newBibleBook);
-        redirectAttributes.addFlashAttribute("message",
-                "Create BibleBook Success!");
-        return "redirect:/bibleBook/";
-    }
-
-    @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-    public String updateForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("bibleBook", bibleBookService.getBibleBook(id));
-        model.addAttribute("action", "update");
-        return "bibleBook/bibleBookForm";
-    }
-
-    @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("bibleBook") BibleBook bibleBook) {
-        bibleBookService.saveBibleBook(bibleBook);
-        return "redirect:/bibleBook";
-    }
-
-    @RequestMapping(value = "delete/{id}")
-    public String delete(@PathVariable("id") Long id,
-            RedirectAttributes redirectAttributes) {
-        bibleBookService.deleteBibleBook(id);
-        redirectAttributes.addFlashAttribute("message",
-                "Delete BibleBook Success!");
-        return "redirect:/bibleBook";
+    @RequestMapping(value = "read", method = RequestMethod.POST)
+    public String readBook(@Valid @ModelAttribute("bibleChapter") BibleChapter bibleChapter) {
+        bibleChapterService.saveBibleChapter(bibleChapter);
+        return "redirect:/bible";
     }
 
     @ModelAttribute
