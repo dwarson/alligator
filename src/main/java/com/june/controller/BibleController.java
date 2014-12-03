@@ -53,11 +53,10 @@ public class BibleController {
     }
 
     @ModelAttribute
-    public void getBibleBook(
-            @RequestParam(value = "id", defaultValue = "-1") Long id,
+    public void getBibleChapter(@RequestParam(value = "id", defaultValue = "-1") Long id,
             Model model) {
         if (id != -1) {
-            model.addAttribute("bibleBook", bibleBookService.getBibleBook(id));
+            model.addAttribute("bibleChapter", bibleChapterService.getBibleChapter(id));
         }
     }
 }
