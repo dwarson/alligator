@@ -10,7 +10,7 @@
 	</c:if>
 	<div class="row">
 		<div class="span4 offset7">
-			<form class="form-search" bibleChapter="#">
+			<form class="form-search" bibleVerse="#">
 				<label>Title：</label> <input type="text" name="search_LIKE_title" class="input-medium" value="${param.search_LIKE_title}"> 
 				<button type="submit" class="btn" id="search_btn">Search</button>
 		    </form>
@@ -18,17 +18,17 @@
 	</div>
 	
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>Bible Chapter</th><th>Management</th></tr></thead>
+		<thead><tr><th>Bible Verse</th><th>Management</th></tr></thead>
 		<tbody>
-		<c:forEach items="${bibleChapters}" var="bibleChapter">
+		<c:forEach items="${bibleVerses}" var="bibleVerse">
 			<tr>
-				<td><a href="${ctx}/bibleChapter/update/${bibleChapter.id}">${bibleChapter.title}</a></td>
-				<td><a href="${ctx}/bibleChapter/delete/${bibleChapter.id}">Delete</a></td>
+				<td><a href="${ctx}/bibleVerse/update/${bibleVerse.id}">${bibleVerse.title}</a></td>
+				<td><a href="${ctx}/bibleVerse/delete/${bibleVerse.id}">Delete</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	
-	<div><a class="btn" href="${ctx}/bibleChapter/create">Create Bible Chapter</a></div>
+	<div><a class="btn" href="${ctx}/bibleVerse/create">Create Bible Verse</a></div>
 </body>
 </html>
