@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.june.entity.Link;
+import com.june.entity.User;
 import com.june.repository.LinkDao;
 
 @Component
@@ -16,6 +17,10 @@ public class LinkService {
 
     public List<Link> getAllLink() {
         return (List<Link>) linkDao.findAll();
+    }
+
+    public List<Link> getAllByUser(User user) {
+        return (List<Link>) linkDao.findByUser(user);
     }
 
     public Link getLink(Long id) {

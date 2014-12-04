@@ -26,92 +26,94 @@ import com.june.service.user.ShiroDbRealm.ShiroUser;
 @RequestMapping(value = "/thought")
 public class ThoughtController {
 
-	@Autowired
-	private ThoughtService thoughtService;
+    @Autowired
+    private ThoughtService thoughtService;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private TopicService topicService;
+    @Autowired
+    private TopicService topicService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
-		List<Thought> thoughts = thoughtService.getAllThought();
-		model.addAttribute("thoughts", thoughts);
-		return "thought/thoughtList";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Model model) {
+        Long id = getCurrentUserId();
+        List<Thought> thoughts = thoughtService.getAllByUser(userService
+                .getUser(id));
+        model.addAttribute("thoughts", thoughts);
+        return "thought/thoughtList";
+    }
 
-	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String addThought(Model model) {
-		List<Topic> thoughtTypes = topicService.getAllTopic();
-		model.addAttribute("thoughtTypes", thoughtTypes);
-		model.addAttribute("thought", new Thought());
-		model.addAttribute("action", "create");
-		return "thought/thoughtForm";
-	}
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String addThought(Model model) {
+        List<Topic> thoughtTypes = topicService.getAllTopic();
+        model.addAttribute("thoughtTypes", thoughtTypes);
+        model.addAttribute("thought", new Thought());
+        model.addAttribute("action", "create");
+        return "thought/thoughtForm";
+    }
 
-	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(Thought newThought,
-			RedirectAttributes redirectAttributes) {
-		Long id = getCurrentUserId();
-		newThought.setUser(userService.getUser(id));
-		thoughtService.saveThought(newThought);
-		redirectAttributes.addFlashAttribute("message",
-				"Create Thought Success!");
-		return "redirect:/thought/";
-	}
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public String create(Thought newThought,
+            RedirectAttributes redirectAttributes) {
+        Long id = getCurrentUserId();
+        newThought.setUser(userService.getUser(id));
+        thoughtService.saveThought(newThought);
+        redirectAttributes.addFlashAttribute("message",
+                "Create Thought Success!");
+        return "redirect:/thought/";
+    }
 
-	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("thought", thoughtService.getThought(id));
-		List<Topic> thoughtTypes = topicService.getAllTopic();
-		model.addAttribute("thoughtTypes", thoughtTypes);
-		model.addAttribute("action", "update");
-		return "thought/thoughtForm";
-	}
+    @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
+    public String updateForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("thought", thoughtService.getThought(id));
+        List<Topic> thoughtTypes = topicService.getAllTopic();
+        model.addAttribute("thoughtTypes", thoughtTypes);
+        model.addAttribute("action", "update");
+        return "thought/thoughtForm";
+    }
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("thought") Thought thought) {
-		thoughtService.saveThought(thought);
-		return "redirect:/thought";
-	}
-	
-	@RequestMapping(value = "process/{id}", method = RequestMethod.GET)
-	public String processForm(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("thought", thoughtService.getThought(id));
-		List<Topic> thoughtTypes = topicService.getAllTopic();
-		model.addAttribute("thoughtTypes", thoughtTypes);
-		model.addAttribute("action", "process");
-		return "thought/thoughtForm";
-	}
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("thought") Thought thought) {
+        thoughtService.saveThought(thought);
+        return "redirect:/thought";
+    }
 
-	@RequestMapping(value = "process", method = RequestMethod.POST)
-	public String process(@Valid @ModelAttribute("thought") Thought thought) {
-		thoughtService.saveThought(thought);
-		return "redirect:/thought";
-	}
+    @RequestMapping(value = "process/{id}", method = RequestMethod.GET)
+    public String processForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("thought", thoughtService.getThought(id));
+        List<Topic> thoughtTypes = topicService.getAllTopic();
+        model.addAttribute("thoughtTypes", thoughtTypes);
+        model.addAttribute("action", "process");
+        return "thought/thoughtForm";
+    }
 
-	@RequestMapping(value = "delete/{id}")
-	public String delete(@PathVariable("id") Long id,
-			RedirectAttributes redirectAttributes) {
-		thoughtService.deleteThought(id);
-		redirectAttributes.addFlashAttribute("message",
-				"Delete Thought Success!");
-		return "redirect:/thought";
-	}
+    @RequestMapping(value = "process", method = RequestMethod.POST)
+    public String process(@Valid @ModelAttribute("thought") Thought thought) {
+        thoughtService.saveThought(thought);
+        return "redirect:/thought";
+    }
 
-	@ModelAttribute
-	public void getThought(
-			@RequestParam(value = "id", defaultValue = "-1") Long id,
-			Model model) {
-		if (id != -1) {
-			model.addAttribute("thought", thoughtService.getThought(id));
-		}
-	}
+    @RequestMapping(value = "delete/{id}")
+    public String delete(@PathVariable("id") Long id,
+            RedirectAttributes redirectAttributes) {
+        thoughtService.deleteThought(id);
+        redirectAttributes.addFlashAttribute("message",
+                "Delete Thought Success!");
+        return "redirect:/thought";
+    }
 
-	private Long getCurrentUserId() {
-		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.id;
-	}
+    @ModelAttribute
+    public void getThought(
+            @RequestParam(value = "id", defaultValue = "-1") Long id,
+            Model model) {
+        if (id != -1) {
+            model.addAttribute("thought", thoughtService.getThought(id));
+        }
+    }
+
+    private Long getCurrentUserId() {
+        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        return user.id;
+    }
 }

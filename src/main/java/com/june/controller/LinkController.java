@@ -42,7 +42,8 @@ public class LinkController {
     public String list(Model model) {
         Map<String, List<Link>> links = new HashMap<String, List<Link>>();
         List<Topic> linkTypes = topicService.getAllTopic();
-        List<Link> allLink = linkService.getAllLink();
+        Long id = getCurrentUserId();
+        List<Link> allLink = linkService.getAllByUser(userService.getUser(id));
         for (Topic topic : linkTypes) {
             List<Link> linkList = new ArrayList<Link>();
             for (Link link : allLink) {
@@ -58,7 +59,8 @@ public class LinkController {
 
     @RequestMapping(value = "manage", method = RequestMethod.GET)
     public String manage(Model model) {
-        List<Link> links = linkService.getAllLink();
+        Long id = getCurrentUserId();
+        List<Link> links = linkService.getAllByUser(userService.getUser(id));
         model.addAttribute("links", links);
         return "link/linkList";
     }

@@ -7,41 +7,46 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.june.entity.ActionPlan;
+import com.june.entity.User;
 import com.june.repository.ActionPlanDao;
 
 @Component
 @Transactional
 public class ActionPlanService {
-	private ActionPlanDao ActionPlanDao;
+    private ActionPlanDao actionPlanDao;
 
-	public List<ActionPlan> getAllActionPlan() {
-		return (List<ActionPlan>) ActionPlanDao.findAll();
-	}
+    public List<ActionPlan> getAllActionPlan() {
+        return (List<ActionPlan>) actionPlanDao.findAll();
+    }
 
-	public ActionPlan getActionPlan(Long id) {
-		return ActionPlanDao.findOne(id);
-	}
+    public List<ActionPlan> getAllByUser(User user) {
+        return (List<ActionPlan>) actionPlanDao.findByUser(user);
+    }
 
-	public ActionPlan findByActionPlanTitle(String title) {
-		return ActionPlanDao.findByTitle(title);
-	}
+    public ActionPlan getActionPlan(Long id) {
+        return actionPlanDao.findOne(id);
+    }
 
-	public void saveActionPlan(ActionPlan ActionPlan) {
-		ActionPlanDao.save(ActionPlan);
-	}
+    public ActionPlan findByActionPlanTitle(String title) {
+        return actionPlanDao.findByTitle(title);
+    }
 
-	public void deleteActionPlan(Long id) {
-		ActionPlanDao.delete(id);
+    public void saveActionPlan(ActionPlan ActionPlan) {
+        actionPlanDao.save(ActionPlan);
+    }
 
-	}
+    public void deleteActionPlan(Long id) {
+        actionPlanDao.delete(id);
 
-	public void deleteActionPlan(ActionPlan ActionPlan) {
-		ActionPlanDao.delete(ActionPlan);
-	}
+    }
 
-	@Autowired
-	public void setActionPlanDao(ActionPlanDao ActionPlanDao) {
-		this.ActionPlanDao = ActionPlanDao;
-	}
+    public void deleteActionPlan(ActionPlan ActionPlan) {
+        actionPlanDao.delete(ActionPlan);
+    }
+
+    @Autowired
+    public void setActionPlanDao(ActionPlanDao ActionPlanDao) {
+        this.actionPlanDao = ActionPlanDao;
+    }
 
 }

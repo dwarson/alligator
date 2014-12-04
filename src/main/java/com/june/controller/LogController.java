@@ -37,7 +37,8 @@ public class LogController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
-        List<Log> logs = logService.getAllLog();
+        Long id = getCurrentUserId();
+        List<Log> logs = logService.getAllByUser(userService.getUser(id));
         model.addAttribute("logs", logs);
         return "log/logList";
     }
