@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +22,10 @@ import com.june.entity.Topic;
 import com.june.service.LinkService;
 import com.june.service.TopicService;
 import com.june.service.UserService;
-import com.june.service.user.ShiroDbRealm.ShiroUser;
 
 @Controller
 @RequestMapping(value = "/link")
-public class LinkController {
+public class LinkController extends BaseController{
 
     @Autowired
     private LinkService linkService;
@@ -115,8 +113,4 @@ public class LinkController {
         }
     }
 
-    private Long getCurrentUserId() {
-        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        return user.id;
-    }
 }

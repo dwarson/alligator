@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +19,10 @@ import com.june.entity.Thought;
 import com.june.service.ActionPlanService;
 import com.june.service.ThoughtService;
 import com.june.service.UserService;
-import com.june.service.user.ShiroDbRealm.ShiroUser;
 
 @Controller
 @RequestMapping(value = "/actionPlan")
-public class ActionPlanController {
+public class ActionPlanController extends BaseController {
     private static String[] ACTION_PLAN_TYPES = { "ASAP", "Scheduled",
             "Delegated", "Inactive", "Done" };
     private static String[] ACTION_PLAN_CONTEXT = { "Home", "Office", "Church",
@@ -50,7 +48,8 @@ public class ActionPlanController {
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
         Long id = getCurrentUserId();
-        List<ActionPlan> actionPlans = actionPlanService.getAllByUser(userService.getUser(id));
+        List<ActionPlan> actionPlans = actionPlanService
+                .getAllByUser(userService.getUser(id));
         model.addAttribute("actionPlans", actionPlans);
         return "actionPlan/actionPlanList";
     }
@@ -58,7 +57,8 @@ public class ActionPlanController {
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String addActionPlan(Model model) {
         Long id = getCurrentUserId();
-        List<Thought> thoughts = thoughtService.getAllByUser(userService.getUser(id));
+        List<Thought> thoughts = thoughtService.getAllByUser(userService
+                .getUser(id));
         model.addAttribute("thoughts", thoughts);
         model.addAttribute("types", ACTION_PLAN_TYPES);
         model.addAttribute("contexts", ACTION_PLAN_CONTEXT);
@@ -84,7 +84,8 @@ public class ActionPlanController {
     @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model model) {
         Long userId = getCurrentUserId();
-        List<Thought> thoughts = thoughtService.getAllByUser(userService.getUser(userId));
+        List<Thought> thoughts = thoughtService.getAllByUser(userService
+                .getUser(userId));
         model.addAttribute("thoughts", thoughts);
         model.addAttribute("actionPlan", actionPlanService.getActionPlan(id));
         model.addAttribute("types", ACTION_PLAN_TYPES);
@@ -97,7 +98,8 @@ public class ActionPlanController {
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("actionPlan") ActionPlan actionPlan) {
+    public String update(
+            @Valid @ModelAttribute("actionPlan") ActionPlan actionPlan) {
         actionPlanService.saveActionPlan(actionPlan);
         return "redirect:/actionPlan";
     }
@@ -106,7 +108,8 @@ public class ActionPlanController {
     public String delete(@PathVariable("id") Long id,
             RedirectAttributes redirectAttributes) {
         actionPlanService.deleteActionPlan(id);
-        redirectAttributes.addFlashAttribute("message", "Delete ActionPlan Success!");
+        redirectAttributes.addFlashAttribute("message",
+                "Delete ActionPlan Success!");
         return "redirect:/actionPlan";
     }
 
@@ -118,10 +121,5 @@ public class ActionPlanController {
             model.addAttribute("actionPlan",
                     actionPlanService.getActionPlan(id));
         }
-    }
-
-    private Long getCurrentUserId() {
-        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        return user.id;
     }
 }

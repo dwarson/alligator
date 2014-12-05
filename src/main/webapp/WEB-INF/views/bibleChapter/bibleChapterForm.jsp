@@ -39,18 +39,19 @@
         		</div>
 			</div>
 			<div class="control-group">
-					<label for="status" class="control-label">Status</label>
-					<div class="controls">
-						<form:radiobutton path="bibleChapter.status" value="1" /> Yes  
-						<form:radiobutton path="bibleChapter.status" value="0" /> No 
-	        		</div>
-			</div>
-			<div class="control-group">
 				<label for="description" class="control-label">Bible Chapter Description</label>
 				<div class="controls">
 					<textarea id="description" name="description" class="input-large">${bibleChapter.description}</textarea>
 				</div>
 			</div>
+			<c:if test="${action == 'read'}">
+				<div class="control-group">
+					<label for="notes" class="control-label">Notes</label>
+					<div class="controls">
+						<textarea id="notes" name="notes" class="input-large">${notes}</textarea>
+					</div>
+				</div>
+			</c:if>
 			<div class="form-actions">
 				<input id="submit_btn" class="btn btn-primary" type="submit" value="Submit" />&nbsp; 
 				<input id="cancel_btn" class="btn" type="button" value="Retrun" onclick="history.back()" />

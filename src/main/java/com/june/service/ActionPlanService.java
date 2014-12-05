@@ -31,8 +31,8 @@ public class ActionPlanService {
         return actionPlanDao.findByTitle(title);
     }
 
-    public void saveActionPlan(ActionPlan ActionPlan) {
-        actionPlanDao.save(ActionPlan);
+    public void saveActionPlan(ActionPlan actionPlan) {
+        actionPlanDao.save(actionPlan);
     }
 
     public void deleteActionPlan(Long id) {
@@ -40,13 +40,13 @@ public class ActionPlanService {
 
     }
 
-    public void deleteActionPlan(ActionPlan ActionPlan) {
-        actionPlanDao.delete(ActionPlan);
+    public void deleteActionPlan(ActionPlan actionPlan) {
+        actionPlanDao.delete(actionPlan);
     }
 
     @Autowired
-    public void setActionPlanDao(ActionPlanDao ActionPlanDao) {
-        this.actionPlanDao = ActionPlanDao;
+    public void setActionPlanDao(ActionPlanDao actionPlan) {
+        this.actionPlanDao = actionPlan;
     }
 
 }

@@ -3,6 +3,11 @@ drop table if exists fs_log;
 drop table if exists fs_topic;
 drop table if exists fs_thought;
 drop table if exists fs_action;
+drop table if exists fs_bible_book;
+drop table if exists fs_bible_chapter;
+drop table if exists fs_user_chapter_record;
+drop table if exists fs_bible_verse;
+drop table if exists fs_link;
 
 create table fs_user (
 	id bigint auto_increment,

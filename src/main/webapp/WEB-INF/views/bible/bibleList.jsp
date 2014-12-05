@@ -14,7 +14,7 @@
 			<tbody>
 				 <tr><td>
 					<c:forEach items="${bibleBook.chapters}" var="chapter">
-	                    <a href="${ctx}/bible/read/${chapter.id}" <c:if test="${chapter.status =='1'}">style="background-color:#67BCDB"</c:if>>
+	                    <a href="${ctx}/bible/read/${chapter.id}" <c:if test="${records[chapter.id]}">style="background-color:#67BCDB"</c:if>>
 	                    ${chapter.title}
 	                    </a>
 					</c:forEach>

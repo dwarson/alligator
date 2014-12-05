@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +19,10 @@ import com.june.entity.Topic;
 import com.june.service.LogService;
 import com.june.service.TopicService;
 import com.june.service.UserService;
-import com.june.service.user.ShiroDbRealm.ShiroUser;
 
 @Controller
 @RequestMapping(value = "/log")
-public class LogController {
+public class LogController extends BaseController {
 
     @Autowired
     private LogService logService;
@@ -93,8 +91,4 @@ public class LogController {
         }
     }
 
-    private Long getCurrentUserId() {
-        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        return user.id;
-    }
 }
