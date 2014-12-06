@@ -20,26 +20,25 @@
 			<div class="control-group">
 				<label for="bibleBook_title" class="control-label">Bible Book Title:</label>
 				<div class="controls">
-					<input type="text" id="bibleBook_title" name="title" value="${bibleBook.title}"
-						class="input-large required"/>
+					<input type="text" id="bibleBook_title" name="title" value="${bibleBook.title}" class="input-large required"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="author" class="control-label">Author</label>
 				<div class="controls">
-					<textarea id="author" name="author" class="input-large">${bibleBook.author}</textarea>
+					<input type="author" id="author" name="author" value="${bibleBook.author}" class="input-large required"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="bookTime" class="control-label">Time</label>
 				<div class="controls">
-					<textarea id="bookTime" name="bookTime" class="input-large">${bibleBook.bookTime}</textarea>
+					<input type="bookTime" id="bookTime" name="bookTime" value="${bibleBook.bookTime}" class="input-large required"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="bookType" class="control-label">Type</label>
 				<div class="controls">
-					<textarea id="bookType" name="bookType" class="input-large">${bibleBook.bookType}</textarea>
+					<input type="bookType" id="bookType" name="bookType" value="${bibleBook.bookType}" class="input-large required"/>
 				</div>
 			</div>
 			<div class="control-group">

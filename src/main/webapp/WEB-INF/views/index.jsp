@@ -11,6 +11,7 @@
 			<h5 class="nav">Christian Life</h5>
 			<ul>
 				<li><a href="${ctx}/bible">Bible Reading</a></li>
+				<li><a href="${ctx}/pray">Pray</a></li>
 			</ul>
 		</div>
 		<div>

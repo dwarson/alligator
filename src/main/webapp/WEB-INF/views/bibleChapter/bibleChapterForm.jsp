@@ -53,7 +53,12 @@
 				</div>
 			</c:if>
 			<div class="form-actions">
-				<input id="submit_btn" class="btn btn-primary" type="submit" value="Submit" />&nbsp; 
+				<c:if test="${action == 'read'}">
+					<input id="submit_btn" class="btn btn-primary" type="submit"  value="Read" />&nbsp; 
+				</c:if>
+				<c:if test="${action != 'read'}">
+					<input id="submit_btn" class="btn btn-primary" type="submit"  value="Submit" />&nbsp; 
+				</c:if>
 				<input id="cancel_btn" class="btn" type="button" value="Retrun" onclick="history.back()" />
 			</div>
 		</fieldset>

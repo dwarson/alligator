@@ -7,6 +7,7 @@ drop table if exists fs_bible_book;
 drop table if exists fs_bible_chapter;
 drop table if exists fs_user_chapter_record;
 drop table if exists fs_bible_verse;
+drop table if exists fs_pray;
 drop table if exists fs_link;
 
 create table fs_user (
@@ -78,7 +79,7 @@ create table fs_bible_chapter (
 	id bigint auto_increment,
 	book_id bigint not null,
 	title bigint not null,
-	status bigint not null,
+	status bigint,
 	description varchar(255),
     primary key (id)
 ) engine=InnoDB;
@@ -90,6 +91,26 @@ create table fs_bible_verse (
 	content_cn varchar(255),
 	status bigint not null,
 	note varchar(255),
+    primary key (id)
+) engine=InnoDB;
+
+create table fs_user_chapter_record (
+	user_id bigint not null,
+	chapter_id bigint not null,
+	status bigint not null,
+	notes varchar(511),
+    primary key (user_id,chapter_id)
+) engine=InnoDB;
+
+create table fs_pray (
+	id bigint auto_increment,
+	content varchar(511) not null,
+	pray_type bigint not null,
+	notes varchar(511),
+	start_time timestamp not null,
+	update_time timestamp not null,
+	status bigint not null,
+	user_id bigint not null,
     primary key (id)
 ) engine=InnoDB;
 
