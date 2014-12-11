@@ -1,6 +1,3 @@
-=========
-alligator
-=========
 
 a learning project
 Tech stack;
